@@ -110,20 +110,6 @@ defmodule BrunoBlog.Blog do
     Post.changeset(post, attrs)
   end
 
-  def broadcast({:ok, post}, event) do
-    Phoenix.PubSub.broadcast(BrunoBlog.PubSub, "posts", {event, post})
-
-    {:ok, post}
-  end
-
-  def broadcast({:error, _} = error, _) do
-    error
-  end
-
-  def subscribe() do
-    Phoenix.PubSub.subscribe(BrunoBlog.PubSub, "posts")
-  end
-
   alias BrunoBlog.Blog.Comment
 
   @doc """
@@ -171,6 +157,7 @@ defmodule BrunoBlog.Blog do
     %Comment{}
     |> Comment.changeset(attrs)
     |> Repo.insert()
+    |> broadcast(:created_comment)
   end
 
   @doc """
@@ -218,5 +205,29 @@ defmodule BrunoBlog.Blog do
   """
   def change_comment(%Comment{} = comment, attrs \\ %{}) do
     Comment.changeset(comment, attrs)
+  end
+
+  def subscribe_posts() do
+    Phoenix.PubSub.subscribe(BrunoBlog.PubSub, "posts")
+  end
+
+  def subscribe_comments() do
+    Phoenix.PubSub.subscribe(BrunoBlog.PubSub, "comments")
+  end
+
+  def broadcast({:ok, post}, event) when event in [:created_post, :updated_post] do
+    Phoenix.PubSub.broadcast(BrunoBlog.PubSub, "posts", {event, post})
+
+    {:ok, post}
+  end
+
+  def broadcast({:ok, comment}, event) when event in [:created_comment] do
+    Phoenix.PubSub.broadcast(BrunoBlog.PubSub, "comments", {event, comment})
+
+    {:ok, comment}
+  end
+
+  def broadcast({:error, _} = error, _) do
+    error
   end
 end

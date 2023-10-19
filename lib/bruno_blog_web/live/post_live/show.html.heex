@@ -22,7 +22,7 @@
 
 <h2>Comments</h2>
 
-<%= for comment <- @post.comments do %>
+<%= for comment <- @comments do %>
   <%= live_component @socket, BrunoBlogWeb.CommentLive.ShowComponent, id: comment.id, comment: comment %>
 <% end %>
 

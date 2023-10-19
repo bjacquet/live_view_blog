@@ -6,7 +6,7 @@ defmodule BrunoBlogWeb.PostLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    Blog.subscribe()
+    Blog.subscribe_posts()
 
     {:ok, assign(socket, :posts, list_posts())}
   end

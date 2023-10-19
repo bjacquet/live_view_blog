@@ -6,7 +6,7 @@ defmodule BrunoBlogWeb.CommentLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    
+    Blog.subscribe_comments()
 
     {:ok, assign(socket, :comments, list_comments())}
   end
