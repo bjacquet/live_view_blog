@@ -72,6 +72,7 @@ defmodule BrunoBlog.Blog do
     post
     |> Post.changeset(attrs)
     |> Repo.update()
+    |> broadcast(:updated_post)
   end
 
   @doc """

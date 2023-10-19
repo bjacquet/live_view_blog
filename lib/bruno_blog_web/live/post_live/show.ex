@@ -5,6 +5,8 @@ defmodule BrunoBlogWeb.PostLive.Show do
 
   @impl true
   def mount(_params, _session, socket) do
+    Blog.subscribe()
+
     {:ok, socket}
   end
 
@@ -18,4 +20,9 @@ defmodule BrunoBlogWeb.PostLive.Show do
 
   defp page_title(:show), do: "Show Post"
   defp page_title(:edit), do: "Edit Post"
+
+  @impl true
+  def handle_info({:updated_post, post}, socket) do
+    {:noreply, assign(socket, :post, post)}
+  end
 end
