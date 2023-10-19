@@ -109,6 +109,10 @@ defmodule BrunoBlog.Blog do
     {:ok, post}
   end
 
+  defp broadcast({:error, _} = error, _) do
+    error
+  end
+
   def subscribe() do
     Phoenix.PubSub.subscribe(BrunoBlog.PubSub, "posts")
   end
