@@ -18,5 +18,5 @@
 </section>
 
 <%= for post <- @posts do %>
-  <%= live_component @socket, BrunoBlogWeb.PostLive.IndexComponent, id: post.id, post: post  %>
+  <%= live_component BrunoBlogWeb.PostLive.IndexComponent, id: post.id, post: post  %>
 <% end %>

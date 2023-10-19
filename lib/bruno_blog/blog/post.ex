@@ -7,6 +7,8 @@ defmodule BrunoBlog.Blog.Post do
     field :title, :string
     field :username, :string
 
+    has_many :comments, BrunoBlog.Blog.Comment
+
     timestamps()
   end
 
