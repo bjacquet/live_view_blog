@@ -5,7 +5,11 @@ defmodule BrunoBlogWeb.PostLiveTest do
   import BrunoBlog.BlogFixtures
 
   @create_attrs %{body: "some body", title: "some title", username: "some username"}
-  @update_attrs %{body: "some updated body", title: "some updated title", username: "some updated username"}
+  @update_attrs %{
+    body: "some updated body",
+    title: "some updated title",
+    username: "some updated username"
+  }
   @invalid_attrs %{body: nil, title: nil, username: nil}
 
   defp create_post(_) do

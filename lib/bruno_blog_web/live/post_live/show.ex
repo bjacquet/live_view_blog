@@ -16,6 +16,7 @@ defmodule BrunoBlogWeb.PostLive.Show do
   @impl true
   def handle_params(%{"id" => id}, _, socket) do
     post = Blog.get_post!(id)
+
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))

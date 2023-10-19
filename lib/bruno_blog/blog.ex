@@ -38,8 +38,8 @@ defmodule BrunoBlog.Blog do
   def get_post!(id) do
     Repo.one!(
       from p in Post,
-      where: p.id == ^id,
-      preload: [:comments]
+        where: p.id == ^id,
+        preload: [:comments]
     )
   end
 
