@@ -109,7 +109,7 @@ defmodule BrunoBlog.Blog do
     {:ok, post}
   end
 
-  defp broadcast({:error, _} = error, _) do
+  def broadcast({:error, _} = error, _) do
     error
   end
 
