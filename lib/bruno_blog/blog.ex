@@ -53,6 +53,7 @@ defmodule BrunoBlog.Blog do
     %Post{}
     |> Post.changeset(attrs)
     |> Repo.insert()
+    |> broadcast(:created_post)
   end
 
   @doc """
@@ -100,5 +101,15 @@ defmodule BrunoBlog.Blog do
   """
   def change_post(%Post{} = post, attrs \\ %{}) do
     Post.changeset(post, attrs)
+  end
+
+  def broadcast({:ok, post}, event) do
+    Phoenix.PubSub.broadcast(BrunoBlog.PubSub, "posts", {event, post})
+
+    {:ok, post}
+  end
+
+  def subscribe() do
+    Phoenix.PubSub.subscribe(BrunoBlog.PubSub, "posts")
   end
 end

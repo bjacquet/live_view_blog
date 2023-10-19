@@ -6,6 +6,8 @@ defmodule BrunoBlogWeb.PostLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
+    Blog.subscribe()
+
     {:ok, assign(socket, :posts, list_posts())}
   end
 
@@ -43,5 +45,10 @@ defmodule BrunoBlogWeb.PostLive.Index do
   defp list_posts do
     Blog.list_posts()
     |> Enum.sort(fn a, b -> a.inserted_at >= b.inserted_at end)
+  end
+
+  @impl true
+  def handle_info({:created_post, post}, socket) do
+    {:noreply, assign(socket, :posts, fn posts -> [post | posts] end)}
   end
 end
