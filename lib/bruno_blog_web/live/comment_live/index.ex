@@ -23,8 +23,6 @@ defmodule BrunoBlogWeb.CommentLive.Index do
   end
 
   defp apply_action(socket, :new, %{"post_id" => post_id}) do
-    IO.inspect("aplly_action")
-
     socket
     |> assign(:page_title, "New Comment")
     |> assign(:comment, %Comment{post_id: post_id})

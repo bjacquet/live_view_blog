@@ -11,7 +11,7 @@ defmodule BrunoBlogWeb.PostLive.IndexComponent do
         <p><%= String.slice(@post.body, 0..80) %>…</p>
       </section>
       <section>
-        <p><%= @post.username %>, <%= @post.inserted_at %></p>
+        <p><%= @post.username %>, <%= @post.inserted_at %>, <%= Enum.count(@post.comments)%> comments</p>
       </section>
     </section>
     """

@@ -18,7 +18,7 @@ defmodule BrunoBlog.Blog do
 
   """
   def list_posts do
-    Repo.all(Post)
+    Repo.all(from p in Post, preload: [:comments])
   end
 
   @doc """
