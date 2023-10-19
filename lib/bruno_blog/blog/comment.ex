@@ -14,7 +14,8 @@ defmodule BrunoBlog.Blog.Comment do
   @doc false
   def changeset(comment, attrs) do
     comment
-    |> cast(attrs, [:body, :username])
-    |> validate_required([:body, :username])
+    |> cast(attrs, [:body, :username, :post_id])
+    |> validate_required([:body, :username, :post_id])
+    |> validate_length(:body, min: 3, max: 255)
   end
 end

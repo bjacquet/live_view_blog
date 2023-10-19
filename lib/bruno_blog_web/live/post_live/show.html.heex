@@ -13,10 +13,17 @@
   </.modal>
 <% end %>
 
-<span><%= live_patch "Edit", to: Routes.post_show_path(@socket, :edit, @post), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.post_index_path(@socket, :index) %></span>
 
 <%= live_component @socket, BrunoBlogWeb.PostLive.ShowComponent, id: @post.id, post: @post %>
 
+<span><%= live_patch "Edit", to: Routes.post_show_path(@socket, :edit, @post), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.post_index_path(@socket, :index) %></span>
 
 
+<h2>Comments</h2>
+
+<%= for comment <- @post.comments do %>
+  <%= live_component @socket, BrunoBlogWeb.CommentLive.ShowComponent, id: comment.id, comment: comment %>
+<% end %>
+
+<span><%= live_patch "New Comment", to: Routes.comment_index_path(@socket, :new, @post.id) %></span>

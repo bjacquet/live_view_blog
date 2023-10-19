@@ -35,7 +35,13 @@ defmodule BrunoBlog.Blog do
       ** (Ecto.NoResultsError)
 
   """
-  def get_post!(id), do: Repo.get!(Post, id)
+  def get_post!(id) do
+    Repo.one!(
+      from p in Post,
+      where: p.id == ^id,
+      preload: [:comments]
+    )
+  end
 
   @doc """
   Creates a post.

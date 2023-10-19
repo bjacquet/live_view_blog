@@ -25,6 +25,8 @@ defmodule BrunoBlogWeb.Router do
 
     live "/posts/:id", PostLive.Show, :show
     live "/posts/:id/show/edit", PostLive.Show, :edit
+
+    live "/posts/:post_id/comments/new", CommentLive.Index, :new
   end
 
   # Other scopes may use custom stacks.

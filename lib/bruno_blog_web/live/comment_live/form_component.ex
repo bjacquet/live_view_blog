@@ -41,6 +41,10 @@ defmodule BrunoBlogWeb.CommentLive.FormComponent do
   end
 
   defp save_comment(socket, :new, comment_params) do
+    comment_params =
+      comment_params
+      |> Map.put("post_id", socket.assigns.comment.post_id)
+
     case Blog.create_comment(comment_params) do
       {:ok, _comment} ->
         {:noreply,

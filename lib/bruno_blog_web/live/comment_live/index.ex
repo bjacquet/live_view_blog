@@ -6,6 +6,8 @@ defmodule BrunoBlogWeb.CommentLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
+    
+
     {:ok, assign(socket, :comments, list_comments())}
   end
 
@@ -20,10 +22,12 @@ defmodule BrunoBlogWeb.CommentLive.Index do
     |> assign(:comment, Blog.get_comment!(id))
   end
 
-  defp apply_action(socket, :new, _params) do
+  defp apply_action(socket, :new, %{"post_id" => post_id}) do
+    IO.inspect("aplly_action")
+
     socket
     |> assign(:page_title, "New Comment")
-    |> assign(:comment, %Comment{})
+    |> assign(:comment, %Comment{post_id: post_id})
   end
 
   defp apply_action(socket, :index, _params) do
