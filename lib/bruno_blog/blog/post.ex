@@ -15,5 +15,7 @@ defmodule BrunoBlog.Blog.Post do
     post
     |> cast(attrs, [:title, :body, :username])
     |> validate_required([:title, :body, :username])
+    |> validate_length(:title, min: 3, max: 80)
+    |> validate_length(:body, min: 3, max: 255)
   end
 end
