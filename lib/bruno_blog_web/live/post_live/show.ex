@@ -29,7 +29,7 @@ defmodule BrunoBlogWeb.PostLive.Show do
 
   @impl true
   def handle_info({:created_post, post}, socket) do
-    {:noreply, assign(socket, :post, fn post -> post end)}
+    {:noreply, assign(socket, :post, fn posts -> [post | posts] end)}
   end
 
   @impl true

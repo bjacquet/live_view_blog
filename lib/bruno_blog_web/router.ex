@@ -17,7 +17,7 @@ defmodule BrunoBlogWeb.Router do
   scope "/", BrunoBlogWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/", PostLive.Index, :index
 
     live "/posts", PostLive.Index, :index
     live "/posts/new", PostLive.Index, :new

@@ -8,12 +8,31 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+## Data Models
 
-## Learn more
+There are two models **Post** and **Comment**.  Post's attributes are the
+following:
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+- title
+- body
+- author
+- inserted_at
+- updated_at
+
+Each Posts record can have multiple Comments.  Their attributes are:
+
+- body
+- author
+- inserted_at
+- updated_at
+
+## Features
+
+In the Posts listing page we can see all existing posts.  For each one we can
+its title, the first few sentences of the post, its author, creation date, and
+number of comments.  These are ordered by most recent creation date, from top to
+bottom.
+
+When viewing a post we can see its full contents as long as existing comments.
+Here comments are ordered by creation date, from top to bottom.
+
