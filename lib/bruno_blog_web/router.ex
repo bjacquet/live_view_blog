@@ -8,6 +8,7 @@ defmodule BrunoBlogWeb.Router do
     plug :put_root_layout, {BrunoBlogWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug BrunoBlogWeb.Plug.SetUser
   end
 
   pipeline :api do
@@ -28,6 +29,15 @@ defmodule BrunoBlogWeb.Router do
 
     live "/posts/:post_id/comments/new", CommentLive.Index, :new
   end
+
+  scope "/auth", BrunoBlogWeb do
+    pipe_through :browser
+
+    get "/github", AuthController, :request
+    get "/github/callback", AuthController, :callback
+    get "/signout", AuthController, :signout
+  end
+
 
   # Other scopes may use custom stacks.
   # scope "/api", BrunoBlogWeb do
