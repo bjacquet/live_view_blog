@@ -44,7 +44,6 @@ defmodule BrunoBlogWeb.PostLive.Index do
 
   defp list_posts do
     Blog.list_posts()
-    |> Enum.sort(fn a, b -> a.inserted_at >= b.inserted_at end)
   end
 
   @impl true

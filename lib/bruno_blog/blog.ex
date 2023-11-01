@@ -18,7 +18,12 @@ defmodule BrunoBlog.Blog do
 
   """
   def list_posts do
-    Repo.all(from p in Post, preload: [:comments])
+    query =
+      from p in Post,
+      order_by: [desc: :inserted_at],
+      preload: [:comments]
+
+    Repo.all(query)
   end
 
   @doc """
